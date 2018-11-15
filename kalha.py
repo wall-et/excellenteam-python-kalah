@@ -23,4 +23,4 @@ class Kalha(object):
         if not self.board[self.current_player][hole]:
             raise ValueError("Illegal Move. Empty Hole.")
         self.current_player = 1 - self.current_player
-        return self.game_status[1 - self.current_player]
+        return self.game_status[self.current_player]

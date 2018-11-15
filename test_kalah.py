@@ -5,6 +5,7 @@ from kalha import Kalha
 class KalahTestCase(unittest.TestCase):
     def setUp(self):
         self.game = Kalha(6, 4)
+        self.gameempty = Kalha(6, 0)
 
     def tearDown(self):
         pass
@@ -21,6 +22,12 @@ class KalahTestCase(unittest.TestCase):
     def test_player_1(self):
         self.assertEqual(self.game.play(1), "Player 2 plays next")
 
+    def test_player_2(self):
+        self.game.play(1)
+        self.assertEqual(self.game.play(1), "Player 1 plays next")
+
+    def test_empty_hole(self):
+        self.assertRaises(ValueError, self.gameempty.play, 4)
 
 if __name__ == '__main__':
     unittest.main()
