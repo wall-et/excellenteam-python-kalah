@@ -29,5 +29,8 @@ class KalahTestCase(unittest.TestCase):
     def test_empty_hole(self):
         self.assertRaises(ValueError, self.gameempty.play, 4)
 
+    def test_in_game_status(self):
+        self.assertFalse(self.game.done())
+
 if __name__ == '__main__':
     unittest.main()

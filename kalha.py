@@ -12,6 +12,9 @@ class Kalha(object):
     def status(self):
         return tuple(self.board[0]) + tuple(self.board[1])
 
+    def done(self):
+        return self.is_game_over
+
     def play(self, hole):
         if self.is_game_over:
             if self.board[self.current_player][self.holes] == self.board[1 - self.current_player][self.holes]:
