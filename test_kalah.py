@@ -21,5 +21,6 @@ class KalahTestCase(unittest.TestCase):
     def test_player_1(self):
         self.assertEqual(self.game.play(1), "Player 2 plays next")
 
+
 if __name__ == '__main__':
     unittest.main()
