@@ -15,6 +15,9 @@ class Kalha(object):
     def done(self):
         return self.is_game_over
 
+    def score(self):
+        return (self.board[0][self.holes],self.board[1][self.holes])
+
     def play(self, hole):
         if self.is_game_over:
             if self.board[self.current_player][self.holes] == self.board[1 - self.current_player][self.holes]:
