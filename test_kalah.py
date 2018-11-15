@@ -16,6 +16,9 @@ class KalahTestCase(unittest.TestCase):
     def test_minus_hole(self):
         self.assertRaises(IndexError, self.game.play, (-2))
 
+    def test_bank_fail(self):
+        self.assertRaises(IndexError, self.game.play, 6)
+
     def test_large_hole(self):
         self.assertRaises(IndexError, self.game.play, 8)
 
