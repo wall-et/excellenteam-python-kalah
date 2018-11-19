@@ -11,7 +11,7 @@ class KalahTestCase(unittest.TestCase):
         pass
 
     def test_status(self):
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 4, 100, 4, 4, 4, 4, 4, 4, 100))
 
     def test_minus_hole(self):
         self.assertRaises(IndexError, self.game.play, (-2))
@@ -40,23 +40,26 @@ class KalahTestCase(unittest.TestCase):
 
     def test_simple_move(self):
         self.game.play(1)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 4, 4, 4, 4, 4, 4, 100))
 
     def test_crossing_move(self):
         self.game.play(4)
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 5, 1, 5, 5, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 5, 101, 5, 5, 4, 4, 4, 4, 100))
 
     def test_two_simple_moves(self):
         self.game.play(1)
         self.game.play(0)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 0, 5, 5, 5, 5, 4, 100))
 
     def test_player_two_crosses(self):
         self.game.play(1)
         self.game.play(0)
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 0, 5, 5, 5, 5, 4, 100))
         self.game.play(4)
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 101, 1, 6, 6, 5, 5, 4, 100))
         self.game.play(4)
-        self.assertEqual(self.game.status(), (5, 1, 6, 5, 0, 6, 1, 1, 6, 6, 5, 0, 5, 1))
+        self.assertEqual(self.game.status(), (5, 1, 6, 5, 0, 6, 101, 1, 6, 6, 5, 0, 5, 101))
+
 
 if __name__ == '__main__':
     unittest.main()
