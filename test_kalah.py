@@ -46,5 +46,10 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(4)
         self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 5, 1, 5, 5, 4, 4, 4, 4, 0))
 
+    def test_two_simple_moves(self):
+        self.game.play(1)
+        self.game.play(0)
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
+
 if __name__ == '__main__':
     unittest.main()
