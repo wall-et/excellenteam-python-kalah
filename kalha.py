@@ -40,11 +40,10 @@ class Kalha(object):
 
         self.validate_hole(hole)
         player_offset = self.current_player * self.holes
-        # nonlocal amount
         seeds_count = self.board[player_offset + hole]
         self.board[player_offset + hole] = 0
-        # nonlocal hole_index
         hole_index = player_offset + hole + 1
+
         for x in range(seeds_count):
             # print(f"\ncurrent player {self.current_player}")
             # print(self.status())
@@ -54,14 +53,16 @@ class Kalha(object):
             if hole_index == player_offset + self.holes and seeds_count:
                 seeds_count -= 1
                 self.banks[self.current_player] += 1
-            if not seeds_count:
-                break
+                if not seeds_count:
+                    break
             if hole_index == self.holes * 2:
                 hole_index = 0
             self.board[hole_index] += 1
             seeds_count -= 1
+            if not seeds_count:
+                break
             hole_index += 1
 
-
-        self.current_player = 1 - self.current_player
+        if hole_index != player_offset + self.holes:
+            self.current_player = 1 - self.current_player
         return self.game_status[self.current_player]
