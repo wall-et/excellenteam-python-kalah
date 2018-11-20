@@ -62,9 +62,6 @@ class Kalha(object):
             seeds_count -= 1
             hole_index += 1
 
-            # print(self.status())
-            # print(f"hole index {hole_index}")
-            # print(f"seeds left {seeds_count}")
 
         self.current_player = 1 - self.current_player
         return self.game_status[self.current_player]

@@ -65,6 +65,11 @@ class KalahTestCase(unittest.TestCase):
         self.gamesmalboard.play(0)
         self.assertEqual(self.gamesmalboard.status(), (1, 8, 101, 7, 7, 100))
 
+    def test_bonus_move_player_one(self):
+        result = self.game.play(2)
+        self.assertEqual(result,"Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 0, 5, 5, 5, 101, 4, 4, 4, 4, 4, 4, 100))
+
 
 if __name__ == '__main__':
     unittest.main()
