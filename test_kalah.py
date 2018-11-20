@@ -7,6 +7,8 @@ class KalahTestCase(unittest.TestCase):
         self.game = Kalha(6, 4)
         self.gameempty = Kalha(6, 0)
         self.gamesmalboard = Kalha(2, 6)
+        self.gamemoderateboard = Kalha(4, 2)
+
 
     def tearDown(self):
         pass
@@ -100,6 +102,15 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (5, 4, 4, 4, 4, 0, 101, 5, 5, 5, 0, 5, 5, 101))
         result = self.game.play(1)
         self.assertEqual(self.game.status(), (5, 0, 5, 5, 5, 0, 107, 0, 5, 5, 0, 5, 5, 101))
+
+    def test_capture_player_two(self):
+        result = self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0,3,3,2,100,2,2,2,2,100))
+        result = self.gamemoderateboard.play(2)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 3, 2, 100, 2, 2, 0, 3, 101))
+        result = self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 3, 2, 100, 0, 3, 0, 3, 105))
+
 
 
 if __name__ == '__main__':
