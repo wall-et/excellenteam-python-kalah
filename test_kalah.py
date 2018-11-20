@@ -171,13 +171,22 @@ class KalahTestCase(unittest.TestCase):
         self.assertTrue(self.gamemoderateboard.done())
         self.assertEqual(self.gamemoderateboard.victory_state(), "Player 2 wins")
 
-    def test_end_game_tie(self):
+    def test_bunos_then_end_game(self):
         self.gamemoderateboard.set_board([0,0,0,1,0,0,0,0])
-        self.gamemoderateboard.set_banks([0,1])
+        self.gamemoderateboard.set_banks([0,0])
         self.gamemoderateboard.play(3)
-        self.assertEqual(self.gamemoderateboard.score(), (1, 1))
+        self.assertEqual(self.gamemoderateboard.score(), (1, 0))
         self.assertTrue(self.gamemoderateboard.done())
-        self.assertEqual(self.gamemoderateboard.victory_state(), "Tie")
+        self.assertEqual(self.gamemoderateboard.victory_state(), "Player 1 wins")
+
+    def test_end_game_tie(self):
+        self.game.set_board([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+        self.game.set_banks([2, 0])
+        self.game.play(1)
+        self.game.play(5)
+        self.assertEqual(self.game.score(), (2, 2))
+        self.assertTrue(self.game.done())
+        self.assertEqual(self.game.victory_state(), "Tie")
 
 
 if __name__ == '__main__':
