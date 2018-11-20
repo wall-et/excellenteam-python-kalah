@@ -133,10 +133,12 @@ class KalahTestCase(unittest.TestCase):
         self.gamemoderateboard.play(1)
         self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 5, 105, 0, 0, 4, 2, 100))
         self.gamemoderateboard.play(3)
+        print(self.gamemoderateboard.status())
         self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 106, 1, 1, 5, 3, 100))
         self.gamemoderateboard.play(0)
-        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 106, 0, 2, 5, 3, 100))
-        self.assertTrue(self.game.done())
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 116, 0, 0, 0, 0, 100))
+        self.assertEqual(self.gamemoderateboard.score(), (16, 0))
+        self.assertTrue(self.gamemoderateboard.done())
 
 
 if __name__ == '__main__':

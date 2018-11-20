@@ -34,11 +34,24 @@ class Kalha(object):
             return "Tie"
         return self.game_status[2 + self.current_player]
 
+    def calculate_is_game_over(self):
+        player_offset = self.current_player * self.holes
+        for x in range(player_offset, player_offset + self.holes):
+            print(x)
+            if self.board[x]:
+                return
+        self.is_game_over = True
+        player_offset = (1 - self.current_player) * self.holes
+        for x in range(player_offset, player_offset + self.holes):
+            self.banks[self.current_player] += self.board[x]
+            self.board[x] = 0
+
     def play(self, hole):
         if self.done():
             return self.victory_state()
 
         self.validate_hole(hole)
+
         player_offset = self.current_player * self.holes
         seeds_count = self.board[player_offset + hole]
         self.board[player_offset + hole] = 0
@@ -52,7 +65,7 @@ class Kalha(object):
             hole_index += 1
             if hole_index == self.holes * 2:
                 hole_index = 0
-            if hole_index == (player_offset + self.holes)%(self.holes*2) and seeds_count:
+            if hole_index == (player_offset + self.holes) % (self.holes * 2) and seeds_count:
                 seeds_count -= 1
                 self.banks[self.current_player] += 1
             if not seeds_count:
@@ -60,13 +73,15 @@ class Kalha(object):
             self.board[hole_index] += 1
             seeds_count -= 1
 
-
-        if self.board[hole_index] == 1 and self.board[self.holes*2 - 1 - hole_index] != 0:
+        if self.board[hole_index] == 1 and self.board[self.holes * 2 - 1 - hole_index] != 0:
             self.board[hole_index] = 0
-            self.banks[self.current_player] += 1
-            self.banks[self.current_player] += self.board[self.holes*2 - 1 - hole_index]
-            self.board[self.holes*2 - 1 - hole_index] = 0
+            self.banks[self.current_player] += 1 + self.board[self.holes * 2 - 1 - hole_index]
+            # self.banks[self.current_player] += self.board[self.holes*2 - 1 - hole_index]
+            self.board[self.holes * 2 - 1 - hole_index] = 0
 
-        if hole_index != (player_offset + self.holes)%(self.holes*2):
+        if hole_index != (player_offset + self.holes) % (self.holes * 2):
             self.current_player = 1 - self.current_player
+
+        self.calculate_is_game_over()
+
         return self.game_status[self.current_player]
