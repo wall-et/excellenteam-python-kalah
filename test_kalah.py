@@ -67,15 +67,39 @@ class KalahTestCase(unittest.TestCase):
 
     def test_bonus_move_player_one(self):
         result = self.game.play(2)
-        self.assertEqual(result,"Player 1 plays next")
+        self.assertEqual(result, "Player 1 plays next")
         self.assertEqual(self.game.status(), (4, 4, 0, 5, 5, 5, 101, 4, 4, 4, 4, 4, 4, 100))
 
-    def test_bonus_move_player_otwo(self):
+    def test_bonus_move_player_two(self):
         result = self.game.play(1)
-        self.assertEqual(result,"Player 2 plays next")
+        self.assertEqual(result, "Player 2 plays next")
         result = self.game.play(2)
-        self.assertEqual(result,"Player 2 plays next")
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5,5, 100,4, 4, 0, 5, 5, 5, 101,))
+        self.assertEqual(result, "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 4, 4, 0, 5, 5, 5, 101,))
+
+    def test_Crossing_other_bank_v2(self):
+        result = self.game.play(3)
+        self.assertEqual(result, "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 4, 4, 4, 4, 100,))
+        result = self.game.play(3)
+        self.assertEqual(result, "Player 1 plays next")
+        self.assertEqual(self.game.status(), (5, 4, 4, 0, 5, 5, 101, 5, 4, 4, 0, 5, 5, 101,))
+
+    def test_Crossing_other_bank_bonus_move_v3(self):
+        result = self.game.play(3)
+        self.assertEqual(result, "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 4, 4, 4, 4, 100,))
+        result = self.game.play(2)
+        self.assertEqual(result, "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 0, 5, 5, 5, 101,))
+
+    def test_capture_player_one(self):
+        result = self.game.play(5)
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 5, 5, 5, 4, 4, 4, 100))
+        result = self.game.play(3)
+        self.assertEqual(self.game.status(), (5, 4, 4, 4, 4, 0, 101, 5, 5, 5, 0, 5, 5, 101))
+        result = self.game.play(1)
+        self.assertEqual(self.game.status(), (5, 0, 5, 5, 5, 0, 107, 0, 5, 5, 0, 5, 5, 101))
 
 
 if __name__ == '__main__':
