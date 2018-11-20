@@ -9,7 +9,6 @@ class KalahTestCase(unittest.TestCase):
         self.gamesmalboard = Kalha(2, 6)
         self.gamemoderateboard = Kalha(4, 2)
 
-
     def tearDown(self):
         pass
 
@@ -105,20 +104,26 @@ class KalahTestCase(unittest.TestCase):
 
     def test_capture_player_two(self):
         result = self.gamemoderateboard.play(0)
-        self.assertEqual(self.gamemoderateboard.status(), (0,3,3,2,100,2,2,2,2,100))
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 3, 2, 100, 2, 2, 2, 2, 100))
         result = self.gamemoderateboard.play(2)
         self.assertEqual(self.gamemoderateboard.status(), (0, 3, 3, 2, 100, 2, 2, 0, 3, 101))
         result = self.gamemoderateboard.play(0)
         self.assertEqual(self.gamemoderateboard.status(), (0, 0, 3, 2, 100, 0, 3, 0, 3, 105))
 
     def test_non_capture(self):
-        result = self.gamemoderateboard.play(3)
-        self.assertEqual(self.gamemoderateboard.status(), (2,2,2,0,101,3,2,2,2,100))
-        result = self.gamemoderateboard.play(3)
-        self.assertEqual(self.gamemoderateboard.status(), (3, 2, 2, 0, 101, 3, 2, 2, 0, 101))
-        result = self.gamemoderateboard.play(1)
-        self.assertEqual(self.gamemoderateboard.status(), (3, 0, 3, 1, 101, 3, 2, 2, 0, 101))
-
+        # result = self.gamemoderateboard.play(3)
+        # self.assertEqual(self.gamemoderateboard.status(), (2, 2, 2, 0, 101, 3, 2, 2, 2, 100))
+        # result = self.gamemoderateboard.play(0)
+        # self.assertEqual(self.gamemoderateboard.status(), (2, 2, 2, 0, 101, 0, 3, 3, 1, 101))
+        # result = self.gamemoderateboard.play(1)
+        # self.assertEqual(self.gamemoderateboard.status(), (3, 0, 3, 1, 101, 3, 2, 2, 0, 101))
+        self.game.play(5)
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 5, 5, 5, 4, 4, 4, 100))
+        result = self.game.play(0)
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 0, 6, 6, 5, 5, 5, 100))
+        self.assertEqual(result, "Player 1 plays next")
+        self.game.play(1)
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 101, 0, 6, 6, 5, 5, 5, 100))
 
 
 if __name__ == '__main__':

@@ -61,7 +61,7 @@ class Kalha(object):
             seeds_count -= 1
 
 
-        if self.board[hole_index] == 1:
+        if self.board[hole_index] == 1 and self.board[self.holes*2 - 1 - hole_index] != 0:
             self.board[hole_index] = 0
             self.banks[self.current_player] += 1
             self.banks[self.current_player] += self.board[self.holes*2 - 1 - hole_index]
