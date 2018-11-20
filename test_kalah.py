@@ -111,12 +111,6 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.gamemoderateboard.status(), (0, 0, 3, 2, 100, 0, 3, 0, 3, 105))
 
     def test_non_capture(self):
-        # result = self.gamemoderateboard.play(3)
-        # self.assertEqual(self.gamemoderateboard.status(), (2, 2, 2, 0, 101, 3, 2, 2, 2, 100))
-        # result = self.gamemoderateboard.play(0)
-        # self.assertEqual(self.gamemoderateboard.status(), (2, 2, 2, 0, 101, 0, 3, 3, 1, 101))
-        # result = self.gamemoderateboard.play(1)
-        # self.assertEqual(self.gamemoderateboard.status(), (3, 0, 3, 1, 101, 3, 2, 2, 0, 101))
         self.game.play(5)
         self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 5, 5, 5, 4, 4, 4, 100))
         result = self.game.play(0)
