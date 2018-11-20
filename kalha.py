@@ -20,7 +20,6 @@ class Kalha(object):
         return self.is_game_over
 
     def score(self):
-        # return (self.banks[0], self.banks[1])
         return tuple(self.banks)
 
     def validate_hole(self, hole):
@@ -37,7 +36,6 @@ class Kalha(object):
     def calculate_is_game_over(self):
         player_offset = self.current_player * self.holes
         for x in range(player_offset, player_offset + self.holes):
-            print(x)
             if self.board[x]:
                 return
         self.is_game_over = True
@@ -85,3 +83,9 @@ class Kalha(object):
         self.calculate_is_game_over()
 
         return self.game_status[self.current_player]
+
+    def set_board(self,board):
+        self.board = board
+
+    def set_banks(self,banks):
+        self.banks = banks

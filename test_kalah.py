@@ -119,7 +119,7 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(1)
         self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 101, 0, 6, 6, 5, 5, 5, 100))
 
-    def test_end_game(self):
+    def test_end_game_player_1_win(self):
         self.gamemoderateboard.play(2)
         self.assertEqual(self.gamemoderateboard.status(), (2, 2, 0, 3, 101, 2, 2, 2, 2, 100))
         self.gamemoderateboard.play(0)
@@ -139,6 +139,37 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 116, 0, 0, 0, 0, 100))
         self.assertEqual(self.gamemoderateboard.score(), (16, 0))
         self.assertTrue(self.gamemoderateboard.done())
+
+    def test_end_game_player_1_win(self):
+        self.gamemoderateboard.play(2)
+        self.assertEqual(self.gamemoderateboard.status(), (2, 2, 0, 3, 101, 2, 2, 2, 2, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 0, 3, 104, 2, 0, 2, 2, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 0, 3, 104, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(1)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 1, 4, 105, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(2)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 5, 105, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(1)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 5, 105, 0, 0, 4, 2, 100))
+        self.gamemoderateboard.play(3)
+        print(self.gamemoderateboard.status())
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 106, 1, 1, 5, 3, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 116, 0, 0, 0, 0, 100))
+        self.assertEqual(self.gamemoderateboard.score(), (16, 0))
+        self.assertTrue(self.gamemoderateboard.done())
+        self.assertEqual(self.gamemoderateboard.victory_state(),"Player 1 wins")
+
+    def test_end_game_player_2_win(self):
+        self.gamemoderateboard.set_board([1,0,5,1,0,0,0,1])
+        self.gamemoderateboard.set_banks([0,10])
+        self.gamemoderateboard.play(0)
+        self.gamemoderateboard.play(3)
+        self.assertEqual(self.gamemoderateboard.score(), (0, 18))
+        self.assertTrue(self.gamemoderateboard.done())
+        self.assertEqual(self.gamemoderateboard.victory_state(), "Player 2 wins")
 
 
 if __name__ == '__main__':
