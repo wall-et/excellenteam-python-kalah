@@ -56,10 +56,6 @@ class Kalha(object):
         hole_index = player_offset + hole
 
         for x in range(seeds_count):
-            # print(f"\ncurrent player {self.current_player}")
-            # print(self.status())
-            # print(f"hole index {hole_index}")
-            # print(f"seeds left {seeds_count}")
             hole_index += 1
             if hole_index == self.holes * 2:
                 hole_index = 0
@@ -84,8 +80,8 @@ class Kalha(object):
 
         return self.game_status[self.current_player]
 
-    def set_board(self,board):
+    def set_board(self, board):
         self.board = board
 
-    def set_banks(self,banks):
+    def set_banks(self, banks):
         self.banks = banks
