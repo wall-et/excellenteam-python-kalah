@@ -119,6 +119,25 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(1)
         self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 101, 0, 6, 6, 5, 5, 5, 100))
 
+    def test_end_game(self):
+        self.gamemoderateboard.play(2)
+        self.assertEqual(self.gamemoderateboard.status(), (2, 2, 0, 3, 101, 2, 2, 2, 2, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 0, 3, 104, 2, 0, 2, 2, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 3, 0, 3, 104, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(1)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 1, 4, 105, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(2)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 5, 105, 0, 1, 3, 2, 100))
+        self.gamemoderateboard.play(1)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 5, 105, 0, 0, 4, 2, 100))
+        self.gamemoderateboard.play(3)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 106, 1, 1, 5, 3, 100))
+        self.gamemoderateboard.play(0)
+        self.assertEqual(self.gamemoderateboard.status(), (0, 0, 0, 0, 106, 0, 2, 5, 3, 100))
+        self.assertTrue(self.game.done())
+
 
 if __name__ == '__main__':
     unittest.main()
