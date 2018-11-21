@@ -9,12 +9,12 @@ class Kalha(object):
         self.is_game_over = False
         self.game_status = ["Player 1 plays next", "Player 2 plays next", "Player 1 wins", "Player 2 wins", ]
         self.holes = holes
+        self.seeds = seeds
 
     def status(self):
 
         return tuple(
-            self.board[0:self.holes] + [100 + self.banks[0]] + self.board[self.holes:len(self.board)] + [
-                100 + self.banks[1]])
+            self.board[0:self.holes] + [self.banks[0]] + self.board[self.holes:len(self.board)] + [self.banks[1]])
 
     def done(self):
         return self.is_game_over
@@ -85,3 +85,7 @@ class Kalha(object):
 
     def set_banks(self, banks):
         self.banks = banks
+
+    def __repr__(self):
+        print(f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})")
+        return f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})"

@@ -13,7 +13,7 @@ class KalahTestCase(unittest.TestCase):
         pass
 
     def test_status(self):
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 4, 100, 4, 4, 4, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0))
 
     def test_minus_hole(self):
         self.assertRaises(IndexError, self.game.play, (-2))
@@ -42,122 +42,122 @@ class KalahTestCase(unittest.TestCase):
 
     def test_simple_move(self):
         self.game.play(1)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 4, 4, 4, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0))
 
     def test_crossing_move(self):
         self.game.play(4)
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 5, 101, 5, 5, 4, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 5, 1, 5, 5, 4, 4, 4, 4, 0))
 
     def test_two_simple_moves(self):
         self.game.play(1)
         self.game.play(0)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 0, 5, 5, 5, 5, 4, 100))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
 
     def test_player_two_crosses(self):
         self.game.play(1)
         self.game.play(0)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 0, 5, 5, 5, 5, 4, 100))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
         self.game.play(4)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 101, 1, 6, 6, 5, 5, 4, 100))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 1, 1, 6, 6, 5, 5, 4, 0))
         self.game.play(4)
-        self.assertEqual(self.game.status(), (5, 1, 6, 5, 0, 6, 101, 1, 6, 6, 5, 0, 5, 101))
+        self.assertEqual(self.game.status(), (5, 1, 6, 5, 0, 6, 1, 1, 6, 6, 5, 0, 5, 1))
 
     def test_Crossing_other_bank(self):
         self.game_small_board.play(0)
-        self.assertEqual(self.game_small_board.status(), (1, 8, 101, 7, 7, 100))
+        self.assertEqual(self.game_small_board.status(), (1, 8, 1, 7, 7, 0))
 
     def test_bonus_move_player_one(self):
         result = self.game.play(2)
         self.assertEqual(result, "Player 1 plays next")
-        self.assertEqual(self.game.status(), (4, 4, 0, 5, 5, 5, 101, 4, 4, 4, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 4, 0, 5, 5, 5, 1, 4, 4, 4, 4, 4, 4, 0))
 
     def test_bonus_move_player_two(self):
         result = self.game.play(1)
         self.assertEqual(result, "Player 2 plays next")
         result = self.game.play(2)
         self.assertEqual(result, "Player 2 plays next")
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 100, 4, 4, 0, 5, 5, 5, 101,))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 0, 5, 5, 5, 1,))
 
     def test_Crossing_other_bank_v2(self):
         result = self.game.play(3)
         self.assertEqual(result, "Player 2 plays next")
-        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 4, 4, 4, 4, 100,))
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 1, 5, 4, 4, 4, 4, 4, 0,))
         result = self.game.play(3)
         self.assertEqual(result, "Player 1 plays next")
-        self.assertEqual(self.game.status(), (5, 4, 4, 0, 5, 5, 101, 5, 4, 4, 0, 5, 5, 101,))
+        self.assertEqual(self.game.status(), (5, 4, 4, 0, 5, 5, 1, 5, 4, 4, 0, 5, 5, 1,))
 
     def test_Crossing_other_bank_bonus_move_v3(self):
         result = self.game.play(3)
         self.assertEqual(result, "Player 2 plays next")
-        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 4, 4, 4, 4, 100,))
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 1, 5, 4, 4, 4, 4, 4, 0,))
         result = self.game.play(2)
         self.assertEqual(result, "Player 2 plays next")
-        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 101, 5, 4, 0, 5, 5, 5, 101,))
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 5, 5, 1, 5, 4, 0, 5, 5, 5, 1,))
 
     def test_capture_player_one(self):
         result = self.game.play(5)
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 5, 5, 5, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 1, 5, 5, 5, 4, 4, 4, 0))
         result = self.game.play(3)
-        self.assertEqual(self.game.status(), (5, 4, 4, 4, 4, 0, 101, 5, 5, 5, 0, 5, 5, 101))
+        self.assertEqual(self.game.status(), (5, 4, 4, 4, 4, 0, 1, 5, 5, 5, 0, 5, 5, 1))
         result = self.game.play(1)
-        self.assertEqual(self.game.status(), (5, 0, 5, 5, 5, 0, 107, 0, 5, 5, 0, 5, 5, 101))
+        self.assertEqual(self.game.status(), (5, 0, 5, 5, 5, 0, 7, 0, 5, 5, 0, 5, 5, 1))
 
     def test_capture_player_two(self):
         result = self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 3, 2, 100, 2, 2, 2, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 3, 2, 0, 2, 2, 2, 2, 0))
         result = self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 3, 2, 100, 2, 2, 0, 3, 101))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 3, 2, 0, 2, 2, 0, 3, 1))
         result = self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 3, 2, 100, 0, 3, 0, 3, 105))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 3, 2, 0, 0, 3, 0, 3, 5))
 
     def test_non_capture(self):
         self.game.play(5)
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 5, 5, 5, 4, 4, 4, 100))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 1, 5, 5, 5, 4, 4, 4, 0))
         result = self.game.play(0)
-        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 101, 0, 6, 6, 5, 5, 5, 100))
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 0, 1, 0, 6, 6, 5, 5, 5, 0))
         self.assertEqual(result, "Player 1 plays next")
         self.game.play(1)
-        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 101, 0, 6, 6, 5, 5, 5, 100))
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 1, 0, 6, 6, 5, 5, 5, 0))
 
     def test_end_game_player_1_win(self):
         self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 101, 2, 2, 2, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 1, 2, 2, 2, 2, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 104, 2, 0, 2, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 2, 0, 2, 2, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 104, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 105, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 5, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 105, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 105, 0, 0, 4, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 0, 4, 2, 0))
         self.game_moderate_board.play(3)
         print(self.game_moderate_board.status())
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 106, 1, 1, 5, 3, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 6, 1, 1, 5, 3, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 116, 0, 0, 0, 0, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 16, 0, 0, 0, 0, 0))
         self.assertEqual(self.game_moderate_board.score(), (16, 0))
         self.assertTrue(self.game_moderate_board.done())
 
     def test_end_game_player_1_win(self):
         self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 101, 2, 2, 2, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 1, 2, 2, 2, 2, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 104, 2, 0, 2, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 2, 0, 2, 2, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 104, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 105, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 5, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 105, 0, 1, 3, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 1, 3, 2, 0))
         self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 105, 0, 0, 4, 2, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 0, 4, 2, 0))
         self.game_moderate_board.play(3)
         print(self.game_moderate_board.status())
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 106, 1, 1, 5, 3, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 6, 1, 1, 5, 3, 0))
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 116, 0, 0, 0, 0, 100))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 16, 0, 0, 0, 0, 0))
         self.assertEqual(self.game_moderate_board.score(), (16, 0))
         self.assertTrue(self.game_moderate_board.done())
         self.assertEqual(self.game_moderate_board.victory_state(), "Player 1 wins")
@@ -189,7 +189,7 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.victory_state(), "Tie")
 
     def test_repr(self):
-        assert repr(Kalha(6, 4)) == "Kalah(4, 6, status=(4,4,4,4,4,4,0,4,4,4,4,4,4,0), player=0)"
+        assert repr(Kalha(6, 4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"
 
 
 if __name__ == '__main__':
