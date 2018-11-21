@@ -188,6 +188,9 @@ class KalahTestCase(unittest.TestCase):
         self.assertTrue(self.game.done())
         self.assertEqual(self.game.victory_state(), "Tie")
 
+    def test_repr(self):
+        assert repr(Kalha(6, 4)) == "Kalah(4, 6, status=(4,4,4,4,4,4,0,4,4,4,4,4,4,0), player=0)"
+
 
 if __name__ == '__main__':
     unittest.main()
