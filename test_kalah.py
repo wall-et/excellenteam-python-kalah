@@ -120,54 +120,42 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 1, 1, 0, 6, 6, 5, 5, 5, 0))
 
     def test_end_game_player_1_win(self):
-        self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 1, 2, 2, 2, 2, 0))
+        self.game_moderate_board.set_board([1, 0, 5, 1, 0, 0, 0, 1])
+        self.game_moderate_board.set_banks([10, 0])
         self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 2, 0, 2, 2, 0))
-        self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 5, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 0, 4, 2, 0))
         self.game_moderate_board.play(3)
-        print(self.game_moderate_board.status())
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 6, 1, 1, 5, 3, 0))
-        self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 16, 0, 0, 0, 0, 0))
-        self.assertEqual(self.game_moderate_board.score(), (16, 0))
+        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 17, 0, 0, 0, 0, 1))
+        self.assertEqual(self.game_moderate_board.score(), (17, 1))
         self.assertTrue(self.game_moderate_board.done())
 
-    def test_end_game_player_1_win(self):
-        self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 1, 2, 2, 2, 2, 0))
-        self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 2, 0, 2, 2, 0))
-        self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 5, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(2)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 1, 3, 2, 0))
-        self.game_moderate_board.play(1)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 0, 4, 2, 0))
-        self.game_moderate_board.play(3)
-        print(self.game_moderate_board.status())
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 6, 1, 1, 5, 3, 0))
-        self.game_moderate_board.play(0)
-        self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 16, 0, 0, 0, 0, 0))
-        self.assertEqual(self.game_moderate_board.score(), (16, 0))
-        self.assertTrue(self.game_moderate_board.done())
-        self.assertEqual(self.game_moderate_board.victory_state(), "Player 1 wins")
+    # def test_end_game_player_1_win(self):
+    #     self.game_moderate_board.play(2)
+    #     self.assertEqual(self.game_moderate_board.status(), (2, 2, 0, 3, 1, 2, 2, 2, 2, 0))
+    #     self.game_moderate_board.play(0)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 2, 0, 2, 2, 0))
+    #     self.game_moderate_board.play(0)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 3, 0, 3, 4, 0, 1, 3, 2, 0))
+    #     self.game_moderate_board.play(1)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 0, 1, 4, 5, 0, 1, 3, 2, 0))
+    #     self.game_moderate_board.play(2)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 1, 3, 2, 0))
+    #     self.game_moderate_board.play(1)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 5, 5, 0, 0, 4, 2, 0))
+    #     self.game_moderate_board.play(3)
+    #     print(self.game_moderate_board.status())
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 6, 1, 1, 5, 3, 0))
+    #     self.game_moderate_board.play(0)
+    #     self.assertEqual(self.game_moderate_board.status(), (0, 0, 0, 0, 16, 0, 0, 0, 0, 0))
+    #     self.assertEqual(self.game_moderate_board.score(), (16, 0))
+    #     self.assertTrue(self.game_moderate_board.done())
+    #     self.assertEqual(self.game_moderate_board.victory_state(), "Player 1 wins")
 
     def test_end_game_player_2_win(self):
         self.game_moderate_board.set_board([1, 0, 5, 1, 0, 0, 0, 1])
         self.game_moderate_board.set_banks([0, 10])
         self.game_moderate_board.play(0)
         self.game_moderate_board.play(3)
-        self.assertEqual(self.game_moderate_board.score(), (0, 18))
+        self.assertEqual(self.game_moderate_board.score(), (7, 11))
         self.assertTrue(self.game_moderate_board.done())
         self.assertEqual(self.game_moderate_board.victory_state(), "Player 2 wins")
 
@@ -181,15 +169,18 @@ class KalahTestCase(unittest.TestCase):
 
     def test_end_game_tie(self):
         self.game.set_board([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
-        self.game.set_banks([2, 0])
+        self.game.set_banks([0, 0])
         self.game.play(1)
         self.game.play(5)
-        self.assertEqual(self.game.score(), (2, 2))
+        self.assertEqual(self.game.score(), (1, 1))
         self.assertTrue(self.game.done())
         self.assertEqual(self.game.victory_state(), "Tie")
 
     def test_repr(self):
         assert repr(Kalha(6, 4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"
+
+    # def test_str(self):
+    #     print(str(Kalha(10,15)))
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ class Kalha(object):
         self.is_game_over = True
         player_offset = (1 - self.current_player) * self.holes
         for x in range(player_offset, player_offset + self.holes):
-            self.banks[self.current_player] += self.board[x]
+            self.banks[1 - self.current_player] += self.board[x]
             self.board[x] = 0
 
     def play(self, hole):
@@ -70,7 +70,6 @@ class Kalha(object):
         if self.board[hole_index] == 1 and self.board[self.holes * 2 - 1 - hole_index] != 0:
             self.board[hole_index] = 0
             self.banks[self.current_player] += 1 + self.board[self.holes * 2 - 1 - hole_index]
-            # self.banks[self.current_player] += self.board[self.holes*2 - 1 - hole_index]
             self.board[self.holes * 2 - 1 - hole_index] = 0
 
         if hole_index != (player_offset + self.holes) % (self.holes * 2):
@@ -87,5 +86,9 @@ class Kalha(object):
         self.banks = banks
 
     def __repr__(self):
-        print(f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})")
         return f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})"
+
+    def __str__(self):
+        return self.render()
+
+
