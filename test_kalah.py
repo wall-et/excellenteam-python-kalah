@@ -179,9 +179,9 @@ class KalahTestCase(unittest.TestCase):
     def test_repr(self):
         assert repr(Kalha(6, 4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"
 
-    # def test_str(self):
-    #     print(str(Kalha(10,15)))
+    def test_str(self):
+        print(str(Kalha(6, 4)))
+        assert str(Kalha(6, 4)) == '╭──╮╭──╮╭──╮╭──╮╭──╮╭──╮╭──╮╭──╮\n│  ││04││04││04││04││04││04││00│\n│  │╰──╯╰──╯╰──╯╰──╯╰──╯╰──╯│  │\n│  │╭──╮╭──╮╭──╮╭──╮╭──╮╭──╮│  │\n│00││04││04││04││04││04││04││  │\n╰──╯╰──╯╰──╯╰──╯╰──╯╰──╯╰──╯╰──╯'
 
-
-if __name__ == '__main__':
-    unittest.main()
+        if __name__ == '__main__':
+            unittest.main()
